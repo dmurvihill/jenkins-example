@@ -1,34 +1,15 @@
 pipeline {
     agent any
 
-    node('maven') {
-        stages {
-            stage ('Get Image') {
+    stages {
+        node('maven') {
+            stage('All in one') {
                 steps {
                     def maven = docker.image('maven:latest')
                     maven.pull()
-                }
-            }
-            stage ('Compile Stage') {
-                steps {
                     maven.inside {
                         sh 'mvn clean compile'
-                    }
-                }
-            }
-
-            stage ('Testing Stage') {
-                steps {
-                    maven.inside {
                         sh 'mvn test'
-                    }
-                }
-            }
-
-
-            stage ('Deployment Stage') {
-                steps {
-                    maven.inside {
                         sh 'mvn deploy'
                     }
                 }
