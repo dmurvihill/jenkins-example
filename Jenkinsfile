@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    stages {
-        node('maven') {
+    node('maven') {
+        stages {
             stage ('Get Image') {
                 steps {
                     def maven = docker.image('maven:latest')
