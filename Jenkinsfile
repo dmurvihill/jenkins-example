@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        node('maven') {
-            stage('All in one') {
-                steps {
+        stage('All in one') {
+            steps {
+                node('maven') {
                     def maven = docker.image('maven:latest')
                     maven.pull()
                     maven.inside {
