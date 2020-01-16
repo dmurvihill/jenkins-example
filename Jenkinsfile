@@ -3,8 +3,12 @@ pipeline {
 
     stages {
         node('maven') {
-            def maven = docker.image('maven:latest')
-            maven.pull()
+            stage ('Get Image') {
+                steps {
+                    def maven = docker.image('maven:latest')
+                    maven.pull()
+                }
+            }
             stage ('Compile Stage') {
                 steps {
                     maven.inside {
